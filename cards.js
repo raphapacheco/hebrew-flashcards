@@ -1,4 +1,4 @@
-const cards = [
+const letterCards = [
   { front:"א", back:"Alef", examples:[{word:"אָדָם",translit:"Adam",meaning:"Homem"},{word:"אֵשׁ",translit:"Esh",meaning:"Fogo"},{word:"אֱמֶת",translit:"Emet",meaning:"Verdade"}]},
   { front:"ב", back:"Veit", examples:[{word:"לֵב",translit:"Lev",meaning:"Coração"},{word:"אָב",translit:"Av",meaning:"Pai"},{word:"טוֹב",translit:"Tov",meaning:"Bom"}]},
   { front:"בּ", back:"Beit", examples:[{word:"בֶּן",translit:"Ben",meaning:"Filho"},{word:"בַּיִת",translit:"Bayit",meaning:"Casa"},{word:"בּוֹרֵא",translit:"Bore",meaning:"Criador"}]},
@@ -30,4 +30,20 @@ const cards = [
   { front:"ש", back:"Shin", examples:[{word:"שָׁלוֹם",translit:"Shalom",meaning:"Paz"},{word:"שֵׁם",translit:"Shem",meaning:"Nome"},{word:"שָׁמַיִם",translit:"Shamayim",meaning:"Céus"}]},
   { front:"ת", back:"Thav", examples:[{word:"שַׁבָּת",translit:"Shabát",meaning:"Sábado"},{word:"אֱמֶת",translit:"Emét",meaning:"Verdade"},{word:"בַּיִת",translit:"Báyit",meaning:"Casa"}]},
   { front:"תּ", back:"Tav", examples:[{word:"תּוֹרָה",translit:"Torah",meaning:"Lei"},{word:"תָּם",translit:"Tam",meaning:"Íntegro"},{word:"תֵּן",translit:"Ten",meaning:"Dá"}]}
+];
+
+const vowelCards = [
+  { front:"בַ", back:"Patach", examples:[{word:"גַּן",translit:"Gan",meaning:"Jardim"},{word:"יַד",translit:"Yad",meaning:"Mão"},{word:"חַי",translit:"Chai",meaning:"Vivo"}]},
+  { front:"בָ", back:"Kamatz", examples:[{word:"אָב",translit:"Av",meaning:"Pai"},{word:"דָּבָר",translit:"Davar",meaning:"Palavra"},{word:"שָׁנָה",translit:"Shaná",meaning:"Ano"}]},
+  { front:"בֶ", back:"Segol", examples:[{word:"מֶלֶךְ",translit:"Melech",meaning:"Rei"},{word:"אֶרֶץ",translit:"Eretz",meaning:"Terra"},{word:"יֶלֶד",translit:"Yeled",meaning:"Criança"}]},
+  { front:"בֵ", back:"Tzeirei", examples:[{word:"בֵּן",translit:"Ben",meaning:"Filho"},{word:"שֵׁם",translit:"Shem",meaning:"Nome"},{word:"אֵשׁ",translit:"Esh",meaning:"Fogo"}]},
+  { front:"בִ", back:"Chirik", examples:[{word:"כִּי",translit:"Ki",meaning:"Porque"},{word:"דִּין",translit:"Din",meaning:"Julgamento"},{word:"עִיר",translit:"Ir",meaning:"Cidade"}]},
+  { front:"בֹ", back:"Cholam", examples:[{word:"קֹדֶשׁ",translit:"Kodesh",meaning:"Santidade"},{word:"כֹּל",translit:"Kol",meaning:"Tudo"},{word:"שֹׁרֶשׁ",translit:"Shoresh",meaning:"Raiz"}]},
+  { front:"בוֹ", back:"Cholam Malei", examples:[{word:"שָׁלוֹם",translit:"Shalom",meaning:"Paz"},{word:"טוֹב",translit:"Tov",meaning:"Bom"},{word:"יוֹם",translit:"Yom",meaning:"Dia"}]},
+  { front:"בֻ", back:"Kubutz", examples:[{word:"חֻקָּה",translit:"Chuká",meaning:"Decreto"},{word:"סֻכָּה",translit:"Suká",meaning:"Cabana"},{word:"קֻם",translit:"Kum",meaning:"Levanta"}]},
+  { front:"בוּ", back:"Shuruk", examples:[{word:"רוּחַ",translit:"Ruach",meaning:"Espírito"},{word:"שׁוּב",translit:"Shuv",meaning:"Voltar"},{word:"אוּר",translit:"Ur",meaning:"Luz"}]},
+  { front:"בְ", back:"Shva", examples:[{word:"בְּרֵאשִׁית",translit:"Bereshit",meaning:"No princípio"},{word:"שְׁמַע",translit:"Shmá",meaning:"Ouve"},{word:"זְמַן",translit:"Zman",meaning:"Tempo"}]},
+  { front:"בֲ", back:"Chataf Patach", examples:[{word:"אֲנִי",translit:"Ani",meaning:"Eu"},{word:"חֲלוֹם",translit:"Chalom",meaning:"Sonho"},{word:"אֲדָמָה",translit:"Adamá",meaning:"Solo"}]},
+  { front:"בֱ", back:"Chataf Segol", examples:[{word:"אֱמֶת",translit:"Emet",meaning:"Verdade"},{word:"אֱלֹהִים",translit:"Elohim",meaning:"Deus"},{word:"נֶאֱמָן",translit:"Neemán",meaning:"Fiel"}]},
+  { front:"בֳ", back:"Chataf Kamatz", examples:[{word:"חֳלִי",translit:"Choli",meaning:"Doença"},{word:"אֳנִיָּה",translit:"Oniyá",meaning:"Navio"},{word:"צָהֳרַיִם",translit:"Tzohoráyim",meaning:"Meio-dia"}]}
 ];

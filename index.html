@@ -35,6 +35,12 @@
   <!-- Toolbar -->
   <div class="toolbar">
     <div class="select-wrap">
+      <select id="deckSelect" onchange="changeDeck(this.value)">
+        <option value="letters">Letras</option>
+        <option value="vowels">Vogais</option>
+      </select>
+    </div>
+    <div class="select-wrap">
       <select id="fontSelect" onchange="changeFont(this.value)">
         <optgroup label="Modernas (tela/apps)">
           <option value="'Noto Sans Hebrew', sans-serif">Noto Sans Hebrew</option>
@@ -94,6 +100,7 @@
 <script src="cards.js"></script>
 <script>
 // ─── State ───
+let cards = letterCards;
 let pos = 0;
 let isFlipped = false;
 let isAnimating = false;
@@ -105,11 +112,34 @@ function stripNikud(str) {
 
 function highlightLetter(word, letter) {
   const base = stripNikud(letter);
-  // Agrupa cada letra hebraica com seus sinais combinantes (niqud, dagesh, etc.)
   const clusters = word.match(/([\u05D0-\u05EA][\u0591-\u05C7]*|.)/g) || [];
   return clusters.map(cluster =>
     stripNikud(cluster) === base ? `<span class="hl">${cluster}</span>` : cluster
   ).join('');
+}
+
+function highlightVowel(word, front) {
+  const clusters = word.match(/([\u05D0-\u05EA][\u0591-\u05C7]*|.)/g) || [];
+  const isVavVowel = front.length > 2 && front.includes('ו');
+
+  if (isVavVowel) {
+    // Cholam Malei (וֹ) ou Shuruk (וּ)
+    const vavMark = front.match(/[\u0591-\u05C7]/)?.[0];
+    return clusters.map(cluster => {
+      const base = stripNikud(cluster);
+      const marks = cluster.match(/[\u0591-\u05C7]/g) || [];
+      return (base === 'ו' && marks.includes(vavMark))
+        ? `<span class="hl">${cluster}</span>` : cluster;
+    }).join('');
+  }
+
+  const vowelMark = front.match(/[\u0591-\u05C7]/)?.[0];
+  if (!vowelMark) return word;
+  return clusters.map(cluster => {
+    const marks = cluster.match(/[\u0591-\u05C7]/g) || [];
+    return marks.includes(vowelMark)
+      ? `<span class="hl">${cluster}</span>` : cluster;
+  }).join('');
 }
 
 function savePrefs() {
@@ -170,7 +200,7 @@ function loadCard() {
   examplesDiv.innerHTML = '<div class="examples-title">Exemplos</div>' +
     c.examples.map(e =>
       `<div class="example-row">
-        <div class="example-word">${highlightLetter(e.word, c.front)}</div>
+        <div class="example-word">${(cards === vowelCards ? highlightVowel : highlightLetter)(e.word, c.front)}</div>
         <div class="example-info">
           <span class="example-translit">${e.translit}</span>
           <span class="example-meaning">${e.meaning}</span>
@@ -245,6 +275,12 @@ function prevCard() {
       });
     });
   }, 260);
+}
+
+function changeDeck(deck) {
+  cards = deck === 'vowels' ? vowelCards : letterCards;
+  pos = 0;
+  loadCard();
 }
 
 function changeFont(f) {
