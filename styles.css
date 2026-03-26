@@ -324,19 +324,18 @@ body {
 .btn-audio:hover { opacity: 1; }
 .btn-audio:active { transform: scale(0.85); }
 
-.card-face .btn-audio {
+.card-audio {
   position: absolute;
   bottom: 12px;
   right: 12px;
-  left: auto;
-  top: auto;
   font-size: 1.8rem;
   opacity: 0.5;
-  z-index: 1;
-  margin: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
-.card-face .btn-audio:hover { opacity: 0.9; }
+.card-audio:hover { opacity: 0.9; }
 
 /* Navigation */
 .nav {
