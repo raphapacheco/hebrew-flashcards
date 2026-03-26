@@ -353,6 +353,7 @@ body {
   min-height: 48px;
   font-size: 1rem;
   font-weight: 600;
+  touch-action: manipulation;
 }
 
 /* Keyboard hint */

@@ -94,8 +94,8 @@
 
   <!-- Navigation -->
   <div class="nav">
-    <button class="btn" onclick="prevCard()">← Anterior</button>
-    <button class="btn" onclick="nextCard()">Próximo →</button>
+    <button class="btn" id="btnPrev">← Anterior</button>
+    <button class="btn" id="btnNext">Próximo →</button>
   </div>
 
   <div class="keyboard-hint">← → navegar &nbsp;|&nbsp; Espaço virar</div>
@@ -380,6 +380,16 @@ function onCardClick() {
   }
   flipCard();
 }
+
+// ─── Nav Buttons (touch-first para iOS) ───
+const btnPrev = document.getElementById('btnPrev');
+const btnNext = document.getElementById('btnNext');
+let navTouched = false;
+
+btnPrev.addEventListener('touchend', e => { e.preventDefault(); navTouched = true; prevCard(); });
+btnNext.addEventListener('touchend', e => { e.preventDefault(); navTouched = true; nextCard(); });
+btnPrev.addEventListener('click', () => { if (!navTouched) prevCard(); navTouched = false; });
+btnNext.addEventListener('click', () => { if (!navTouched) nextCard(); navTouched = false; });
 
 // ─── Keyboard ───
 document.addEventListener('keydown', e => {
