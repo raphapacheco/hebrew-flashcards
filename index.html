@@ -28,6 +28,8 @@
   <div class="header">
     <h1>Flashcards</h1>
     <div class="header-actions">
+      <button class="btn btn-icon" onclick="changeFontSize(-1)" title="Diminuir fonte">A-</button>
+      <button class="btn btn-icon" onclick="changeFontSize(1)" title="Aumentar fonte">A+</button>
       <button class="btn btn-icon" onclick="toggleDark()" id="darkBtn" title="Modo escuro">🌙</button>
     </div>
   </div>
@@ -326,6 +328,16 @@ function changeFont(f) {
   backLetter.style.fontFamily = f;
   document.querySelectorAll('.example-word').forEach(el => el.style.fontFamily = f);
   savePrefs();
+}
+
+let fontScale = 0;
+function changeFontSize(delta) {
+  fontScale = Math.max(-3, Math.min(3, fontScale + delta));
+  const scale = 1 + fontScale * 0.15;
+  frontLetter.style.transform = `scale(${scale})`;
+  backName.style.transform = `scale(${scale})`;
+  backLetter.style.transform = `scale(${scale})`;
+  document.querySelectorAll('.example-word').forEach(el => el.style.transform = `scale(${scale})`);
 }
 
 function toggleDark() {
