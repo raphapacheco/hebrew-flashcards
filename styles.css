@@ -271,6 +271,7 @@ body {
   font-size: 0.95rem;
   padding: 6px 0;
   border-bottom: 1px solid var(--surface2);
+  margin-right: -4px;
 }
 
 .example-row:last-child { border-bottom: none; }
