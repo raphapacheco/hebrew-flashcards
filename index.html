@@ -261,12 +261,24 @@ function flipCard() {
   }
 }
 
+function clearAnimation() {
+  [cardInner, examplesDiv].forEach(el => {
+    el.style.transition = '';
+    el.style.transform = '';
+    el.style.opacity = '';
+  });
+  isAnimating = false;
+}
+
 function animateSlide(direction, callback) {
   if (isAnimating) return;
   isAnimating = true;
   const exitX = direction === 'next' ? '-100%' : '100%';
   const enterX = direction === 'next' ? '100%' : '-100%';
   const els = [cardInner, examplesDiv];
+
+  // Failsafe: garante reset mesmo se os timeouts falharem no iOS
+  setTimeout(clearAnimation, 700);
 
   els.forEach(el => {
     el.style.transition = 'transform 0.25s ease, opacity 0.25s ease';
@@ -289,14 +301,7 @@ function animateSlide(direction, callback) {
           el.style.transform = '';
           el.style.opacity = '';
         });
-        setTimeout(() => {
-          els.forEach(el => {
-            el.style.transition = '';
-            el.style.transform = '';
-            el.style.opacity = '';
-          });
-          isAnimating = false;
-        }, 260);
+        setTimeout(clearAnimation, 280);
       });
     });
   }, 260);
