@@ -75,10 +75,12 @@
       <div class="card-face card-front">
         <div class="letter" id="frontLetter"></div>
         <div class="letter-hint">Toque para revelar</div>
+        <button class="btn-audio" onclick="event.stopPropagation(); speakHebrew(cards[pos].front)" title="Ouvir letra">&#x1F50A;</button>
       </div>
       <div class="card-face card-back">
         <div class="letter-name" id="backName"></div>
         <div class="letter-big" id="backLetter"></div>
+        <button class="btn-audio" onclick="event.stopPropagation(); speakHebrew(cards[pos].front)" title="Ouvir letra">&#x1F50A;</button>
       </div>
     </div>
   </div>
@@ -116,6 +118,21 @@ function highlightLetter(word, letter) {
   return clusters.map(cluster =>
     stripNikud(cluster) === base ? `<span class="hl">${cluster}</span>` : cluster
   ).join('');
+}
+
+let currentAudio = null;
+function speakHebrew(text) {
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio = null;
+  }
+  const audio = new Audio(
+    'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=he&q=' +
+    encodeURIComponent(text)
+  );
+  currentAudio = audio;
+  audio.play().catch(() => {});
+  audio.onended = () => { currentAudio = null; };
 }
 
 function highlightVowel(word, front) {
@@ -200,6 +217,7 @@ function loadCard() {
   examplesDiv.innerHTML = '<div class="examples-title">Exemplos</div>' +
     c.examples.map(e =>
       `<div class="example-row">
+        <button class="btn-audio" onclick="speakHebrew('${e.word}')" title="Ouvir palavra">&#x1F50A;</button>
         <div class="example-word">${(cards === vowelCards ? highlightVowel : highlightLetter)(e.word, c.front)}</div>
         <div class="example-info">
           <span class="example-translit">${e.translit}</span>

@@ -307,6 +307,34 @@ body {
   border-radius: 4px;
 }
 
+/* Audio button */
+.btn-audio {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.2rem;
+  padding: 4px;
+  line-height: 1;
+  border-radius: 50%;
+  transition: transform 0.15s, opacity 0.15s;
+  opacity: 0.6;
+  flex-shrink: 0;
+}
+
+.btn-audio:hover { opacity: 1; }
+.btn-audio:active { transform: scale(0.85); }
+
+.card-face .btn-audio {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
+  font-size: 1.4rem;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+.card-face .btn-audio:hover { opacity: 0.9; }
+
 /* Navigation */
 .nav {
   display: flex;
