@@ -239,12 +239,12 @@ function loadCard() {
   examplesDiv.innerHTML = '<div class="examples-title">Exemplos</div>' +
     c.examples.map(e =>
       `<div class="example-row">
-        <button class="btn-audio" onclick="speakHebrew('${e.word}')" title="Ouvir palavra">&#x1F50A;</button>
         <div class="example-word">${(cards === vowelCards ? highlightVowel : highlightLetter)(e.word, c.front)}</div>
         <div class="example-info">
           <span class="example-translit">${e.translit}</span>
           <span class="example-meaning">${e.meaning}</span>
         </div>
+        <button class="btn-audio" onclick="speakHebrew('${e.word}')" title="Ouvir palavra">&#x1F50A;</button>
       </div>`
     ).join('');
 
