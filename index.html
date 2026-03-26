@@ -122,10 +122,26 @@ function highlightLetter(word, letter) {
 
 let currentAudio = null;
 function speakHebrew(text) {
+  // Cancela áudio anterior
+  speechSynthesis.cancel();
   if (currentAudio) {
     currentAudio.pause();
     currentAudio = null;
   }
+
+  // Tenta Web Speech API primeiro (funciona em mobile e sistemas com voz hebraica)
+  const voices = speechSynthesis.getVoices();
+  const heVoice = voices.find(v => v.lang.startsWith('he'));
+  if (heVoice) {
+    const u = new SpeechSynthesisUtterance(text);
+    u.voice = heVoice;
+    u.lang = 'he-IL';
+    u.rate = 0.85;
+    speechSynthesis.speak(u);
+    return;
+  }
+
+  // Fallback: Google Translate TTS
   const audio = new Audio(
     'https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=he&q=' +
     encodeURIComponent(text)
@@ -134,6 +150,10 @@ function speakHebrew(text) {
   audio.play().catch(() => {});
   audio.onended = () => { currentAudio = null; };
 }
+
+// Pré-carrega lista de vozes (alguns navegadores carregam de forma assíncrona)
+speechSynthesis.getVoices();
+speechSynthesis.onvoiceschanged = () => { speechSynthesis.getVoices(); };
 
 function highlightVowel(word, front) {
   const clusters = word.match(/([\u05D0-\u05EA][\u0591-\u05C7]*|.)/g) || [];
